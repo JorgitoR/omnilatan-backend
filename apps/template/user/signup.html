@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div>
+	<form method="POST" class="signup-form">
+		{% csrf_token %}
+		
+		<p>
+			<label for="id_email">Email:</label> 
+			<input type="email" name="email" required="" id="id_email">
+		</p>
+
+		<p>
+			<label for="id_username">Username:</label> 
+			<input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username"> 
+		</p>
+
+
+		<p>
+			<label for="id_first_name">First name:</label> 
+			<input type="text" name="first_name" required="" id="id_first_name">
+		</p>
+
+
+		<p>
+			<label for="id_last_name">Last name:</label> 
+			<input type="text" name="last_name" required="" id="id_last_name">
+		</p>
+
+		<p>
+			<label for="id_password1">Password:</label> 
+			<input type="password" name="password" autocomplete="new-password" required="" id="id_password1"> 
+		</p>
+
+	
+		<p>
+			<label for="id_password2">Password confirmation:</label> 
+			<input type="password" name="password_confirmation" autocomplete="new-password" required="" id="id_password2"> 
+			<span class="helptext">Enter the same password as before, for verification.</span>
+		</p>
+		
+	
+		
+		<button type="submit">
+			Sign UP
+		</button>
+	</form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+
+$('.signup-form').submit(function(event){
+	event.preventDefault()
+	var this_ = $(this)
+	var formData = this_.serialize()
+	console.log(formData)
+
+	$.ajax({
+
+		url : "/users/signup/",
+		data : formData,
+		method : "POST",
+
+		success : function(data){
+			console.log(data)
+			window.location.href = "/login/"
+		}, 
+
+		error : function(data){
+			console.log(data.status)
+		}
+
+	})
+
+})
+
+</script>
+
+
+
+{% endblock %}
