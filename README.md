@@ -14,7 +14,7 @@ E-commerce to manage users, product, orders, payments and shipments.
 # Specifications
 
 - Django REST Framework for API
-- Email to senf token verification
+- Email to send token verification
 - Django to develop the web project
 
 
