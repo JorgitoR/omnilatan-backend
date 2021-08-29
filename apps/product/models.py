@@ -52,8 +52,8 @@ class Product(BaseModel):
 	imagen = models.ImageField(upload_to='img/product')
 	description = models.TextField()
 
-	stock = models.IntegerField()
-	price = models.FloatField()
+	stock = models.IntegerField(blank=True, null=True)
+	price = models.FloatField(blank=True, null=True)
 
 	order = GenericRelation(OrderProduct, related_query_name='order_product')
 
