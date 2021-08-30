@@ -17,16 +17,25 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import View 
 
 def OrderSeller(request, pk_order):
+	"""Order seller
+		This function allows to the user seller or store see the order of 
+		the customer
+	"""
 	order = get_object_or_404(Order, pk=pk_order)
 	product_order = ProductsOrdered.objects.filter(order=order, product__order_product__user=request.user)
 	
 	context = {
-		'orders':product_order
+		'order':order,
+		'products':product_order
 	}
 
 	return render(request, 'order/seller.html', context)
 
 class SumaryOrder(View):
+	"""Sumary Order
+		This  views allow us to render the products ordered
+	"""
+
 	def get(self, *args, **kwargs):
 		try:
 			order = Order.objects.get(user=self.request.user, purchased=False)
@@ -41,7 +50,14 @@ class SumaryOrder(View):
 			return redirect("/")
 
 def add_to_cart(request, slug):
+	"""Add to cart
+	This view allows customer to choose item to purchase
+	without actually completing the payment.
+	"""
+
+	#we take the instance of the product to add
 	product = get_object_or_404(Product, slug=slug)
+
 	order_product, created = OrderProduct.objects.get_or_create(
 		content_type=product.get_content_type,
 		object_id= product.id,
@@ -95,6 +111,12 @@ def add_to_cart(request, slug):
 
 
 def remove_single_product(request, slug):
+	"""Remove single product
+
+		this function allows to  remove single product
+		of the cart
+	
+	"""
 	product = get_object_or_404(Product, slug=slug)
 
 	order_qs = Order.objects.filter(user=request.user, purchased=False)

@@ -52,7 +52,8 @@ LOCAL_APPS = [
     'omnilatam.apps.user',
     'omnilatam.apps.notification',
     'omnilatam.apps.order',
-    'omnilatam.apps.product'
+    'omnilatam.apps.product',
+    'omnilatam.apps.payment',
 
 ]
 
@@ -141,6 +142,13 @@ AUTH_USER_MODEL ='user.User'
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    #No sera nuestro servidor, sera nuestro almacenamiento a largo plazo
+    os.path.join(BASE_DIR, "static"),
+ 
+]
+#sera nuestro servidor
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static-serve")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

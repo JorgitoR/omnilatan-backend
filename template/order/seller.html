@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+
+	<div class="container_mainCheckouts" >
+
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  	<span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        {% block content %}
+        {% endblock %}
+ 
+         
+
+	<h6>Order de {{order.user}} -- <strong>Estado:</strong> {% if order.purchased %}Completada{% else %}Incompleta{% endif %}</h6>
+	<div class="checkContainer">
+		
+		{% for item in products %}
+
+	
+		<div class="div_producto">
+			<div class="d-flex align-items-center" >
+				<img src="{{item.product.content_object.imagen.url}}">
+				<div class="ml-2">
+					<h5>{{item.product.content_object.title}}</h5>
+					<p>{{item.product.content_object.description}}</p>
+
+					<span><strong>USD:</strong> ${{item.product.content_object.price}} </span>
+					<div>
+						<span><strong>Cantidad:</strong> {{item.product.amount}} </span>
+					</div>
+				</div>
+			</div>
+
+
+			<button class="ShowMore">
+				Descripción de Pago
+			</button>
+
+		</div>
+		{% endfor %}
+		
+
+	</div>
+
+	</div>
+
+
+
+{% endblock %}

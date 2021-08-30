@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('omnilatam.apps.order.urls')),
     path('', include('omnilatam.apps.order.api.urls')),
     path('', include('omnilatam.apps.product.api.urls')),
+    path('', include('omnilatam.apps.payment.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

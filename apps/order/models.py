@@ -13,6 +13,7 @@ from django.contrib.contenttypes.models import ContentType
 
 # Models
 from omnilatam.apps.user.models import User
+from omnilatam.apps.payment.models import Payment
 
 # signals
 from omnilatam.apps.notification.signals import notify
@@ -25,6 +26,7 @@ PURCHASE_STATUS = (
 
 class OrderProduct(BaseModel):
 	"""Order product models.
+
 	"""
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -47,10 +49,18 @@ class OrderProduct(BaseModel):
 
 class Order(BaseModel):
 	"""Order Models.
-
+    1. Item added to cart
+    2. Adding a billing address
+    (Failed checkout)
+    3. Payment
+    (Preprocessing, processing, packaging etc.)
+    4. Being delivered
+    5. Received
+    6. Refunds
 	"""
 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
 	product = models.ManyToManyField(OrderProduct, through='ProductsOrdered')
+	payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
 	purchased = models.BooleanField(default=False)
 	status = models.CharField(max_length=100, choices=PURCHASE_STATUS)
 

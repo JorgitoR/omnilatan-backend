@@ -15,55 +15,49 @@
 			 </small>
 			</button>
 
-
-			<a href="">
-			<button  class="b-sell">
-			 <small>
-			 	View all order
-			 </small>
-			</button>
-			</a>
-
 		</p>
 	
 	</div>
 
 </div>
 
-{{orders}}
+<div class="div-header-order">
+	<h3>
+		Orders
+	</h3>
+</div>
 
-{% for orders in orders %}
-
-{{orders}}
-
-{% empty %}
-<h1>No hay orders</h1>
-{% endfor %}
-
-
-<style>
-
-.div-profile{
-	padding-top: 3.5em;
-	padding-left: 1em;
-	padding-right: 1em;
-	padding-bottom: 3.5em;
-
-	overflow: auto;
-	height: 100%;
-}
-
-.a-logout, .b-sell{
-	outline: none;
-	cursor: pointer;
-	border: none;
-	border-radius: 3px;
-	color: #333;
-	border: 1px solid #333;
+<div class="div-order">
+	{% for orders in orders %}
 	
-}
+	<div class="div-order-customer">
+		<a href="{% url 'order-seller' orders.pk %}">
+		<div class="div-content-order">
 
-</style>
+					<div class="div-img-order-customer">
+						<img src="https://i.imgur.com/dGo8DOk.jpg" class="img_perfil margiin_img">
+					</div>
+
+					<div class="ml-2" >
+						<h5>{{orders.user.username}}</h5>
+						
+					</div>
+		</div>
+		</a>
+				<div>
+					<p style="text-align: right;">
+						Estado:  {% if orders.purchased %}{% else %}{{orders.purchased}}{% endif %}
+					</p>
+				</div>
+	</div>
+
+	</div>
+	{% empty %}
+	<h1>No hay orders</h1>
+
+	{% endfor %}
+</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>

@@ -13,7 +13,7 @@ def login(request):
 
 def profile(request):
 
-	orders = Order.objects.filter(product__order_product__user=request.user)
+	orders = Order.objects.filter(product__order_product__user=request.user).distinct()
 
 	context = {
 		'orders':orders

@@ -37,6 +37,9 @@ class Category(BaseModel):
 		return self.name
 
 	def get_badge(self):
+		"""
+			This return a tag to renderizer in a html
+		"""
 		name = escape(self.name)
 		color = escape(self.color)
 		html = '<button style="background:%s"> %s </>' %(self.color, self.name)
@@ -44,7 +47,8 @@ class Category(BaseModel):
 
 class Product(BaseModel):
 	"""Produc models.
-		Handle the products for the e-commerce
+		Handle the products for the e-commerce, this model allows 
+		to create a product
 	"""
 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='product')
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product')
