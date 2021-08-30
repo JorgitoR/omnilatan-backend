@@ -71,7 +71,7 @@ class Order(BaseModel):
 
 
 class ProductsOrdered(models.Model):
-	product = models.ForeignKey(OrderProduct, on_delete=models.CASCADE)
+	product = models.ForeignKey(OrderProduct, on_delete=models.CASCADE, related_name='product_order')
 	order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 

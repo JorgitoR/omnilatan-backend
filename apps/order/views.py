@@ -4,6 +4,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import (OrderProduct, Order, ProductsOrdered)
 from omnilatam.apps.product.models import Product
 
+# Forms
+from .forms import OrderSendForm
+
 # Views Generics
 from django.views.generic import ListView, CreateView
 
@@ -23,10 +26,19 @@ def OrderSeller(request, pk_order):
 	"""
 	order = get_object_or_404(Order, pk=pk_order)
 	product_order = ProductsOrdered.objects.filter(order=order, product__order_product__user=request.user)
-	
+		
+	form = OrderSendForm(request.POST or None)
+	if form.is_valid():
+		status = form.cleaned_data.get('status')
+		order.status = status
+		order.save()
+
+
+
 	context = {
 		'order':order,
-		'products':product_order
+		'products':product_order,
+		'form':form
 	}
 
 	return render(request, 'order/seller.html', context)

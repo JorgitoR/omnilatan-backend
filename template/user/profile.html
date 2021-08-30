@@ -28,10 +28,10 @@
 </div>
 
 <div class="div-order">
-	{% for orders in orders %}
+	{% for order in orders %}
 	
 	<div class="div-order-customer">
-		<a href="{% url 'order-seller' orders.pk %}">
+		<a href="{% url 'order-seller' order.pk %}">
 		<div class="div-content-order">
 
 					<div class="div-img-order-customer">
@@ -39,14 +39,14 @@
 					</div>
 
 					<div class="ml-2" >
-						<h5>{{orders.user.username}}</h5>
+						<h5>{{order.user.username}}</h5>
 						
 					</div>
 		</div>
 		</a>
 				<div>
 					<p style="text-align: right;">
-						Estado:  {% if orders.purchased %}{% else %}{{orders.purchased}}{% endif %}
+						Estado: {% if order.purchased %}Completada{% else %}Incompleta{% endif %}
 					</p>
 				</div>
 	</div>

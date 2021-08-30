@@ -39,10 +39,21 @@
 				</div>
 			</div>
 
+			<form method="POST">
+				{% csrf_token %}
+				{{form}}
 
-			<button class="ShowMore">
-				Descripción de Pago
-			</button>
+				{% if order.purchased %}
+					<button class="ShowMore" type="submit">
+					Enviar Orden
+					</button>
+				{% else %}
+					<button class="ShowMore">
+						Estado: Incompleta
+					</button>
+				{% endif %}
+			</form>
+		
 
 		</div>
 		{% endfor %}
