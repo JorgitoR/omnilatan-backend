@@ -17,7 +17,7 @@ E-commerce to manage users, product, orders, payments and shipments.
 - Email to send token verification
 - Django to develop the web project
 
-
+<img src="https://i.ibb.co/kXJCC8J/Whats-App-Image-2021-08-30-at-7-52-41-AM.jpg" />
 
 
 
