@@ -34,6 +34,7 @@ class ProductViewSet(mixins.RetrieveModelMixin,
 
 	queryset = Product.objects.all()
 	serializer_class = ProductModelSerializer
+	pagination_class = StandardResultsPagination
 	lookup_field='slug'
 
 
@@ -49,6 +50,12 @@ class ProductViewSet(mixins.RetrieveModelMixin,
 		}
 
 		return Response(data, status=status.HTTP_201_CREATED)
+
+
+	def list(self, request):
+		queryset = Product.objects.all()
+		serializer = ProductModelSerializer(queryset, many=True)
+		return  Response(serializer.data)
 
 
 class ProductListAPIView(generics.ListAPIView):
